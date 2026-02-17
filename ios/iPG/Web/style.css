@@ -73,6 +73,10 @@ body {
   flex-direction: column;
   align-items: center;
   padding: var(--s8);
+  padding-top: calc(var(--s8) + env(safe-area-inset-top, 0px));
+  padding-right: calc(var(--s8) + env(safe-area-inset-right, 0px));
+  padding-bottom: calc(var(--s8) + env(safe-area-inset-bottom, 0px));
+  padding-left: calc(var(--s8) + env(safe-area-inset-left, 0px));
   -webkit-tap-highlight-color: transparent;
   tap-highlight-color: transparent;
 }
