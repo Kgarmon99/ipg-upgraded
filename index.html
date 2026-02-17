@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>iPG — YC Practice</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="bodyEl">
+  <div class="app">
+    <header class="header focus-mode-hide" id="mainHeader">
+      <span class="logo">iPG</span>
+      <nav class="header-actions">
+        <button type="button" class="btn-icon hidden" id="btnHome" aria-label="Home">Home</button>
+        <button type="button" class="btn-icon focus-mode-hide" id="btnFocus" aria-label="Focus">Focus</button>
+        <button type="button" class="btn-icon" id="btnSettings" aria-label="Settings">Settings</button>
+        <button type="button" class="btn-icon" id="btnTheme" aria-label="Theme">Theme</button>
+      </nav>
+    </header>
+
+    <section class="screen screen-setup" id="screenSetup">
+      <div class="card setup">
+        <h1 class="setup-title">Practice</h1>
+        <div class="row">
+          <label for="timerDuration">Time</label>
+          <select id="timerDuration">
+            <option value="10">10 sec</option>
+            <option value="15">15 sec</option>
+            <option value="20">20 sec</option>
+            <option value="30">30 sec</option>
+            <option value="0">No timer</option>
+          </select>
+        </div>
+        <div class="row">
+          <span class="row-label">Topics</span>
+          <div class="category-toggles" id="categoryToggles"></div>
+        </div>
+        <p class="field-error hidden" id="categoryError">Pick at least one.</p>
+        <div class="row">
+          <label for="questionCount">Questions</label>
+          <select id="questionCount">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="0">All</option>
+          </select>
+        </div>
+        <label class="row row-check">
+          <input type="checkbox" id="strictMode" />
+          <span>Strict — no reset</span>
+        </label>
+        <button type="button" class="btn btn-primary btn-block" id="btnStart">Go</button>
+      </div>
+    </section>
+
+    <div class="countdown-overlay hidden" id="countdownOverlay">
+      <div class="countdown-inner">
+        <p class="countdown-prompt" id="countdownPrompt">Breathe</p>
+        <span class="countdown-number" id="countdownNumber">3</span>
+      </div>
+    </div>
+
+    <section class="screen screen-interview hidden" id="screenInterview">
+      <div class="progress-wrap focus-mode-hide" id="progressBarWrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressBarFill"></div>
+        </div>
+        <span class="progress-num" id="progressBarLabel">0/0</span>
+      </div>
+
+      <div class="follow-up-card hidden" id="followUpCard">
+        <p class="follow-up-text" id="followUpText"></p>
+        <button type="button" class="btn btn-primary" id="btnFollowUpContinue">Next</button>
+      </div>
+
+      <div class="hero">
+        <p class="category-badge" id="categoryBadge" aria-hidden="true"></p>
+        <h2 class="question" id="questionText" tabindex="-1" aria-live="polite"></h2>
+      </div>
+
+      <div class="hint-wrap focus-mode-hide hidden" id="hintWrap">
+        <button type="button" class="hint-btn" id="hintToggle" aria-expanded="false">Hint</button>
+        <div class="hint-body hidden" id="hintContent"></div>
+      </div>
+
+      <div class="timer-zone">
+        <div class="timer-wrap" id="timerWrap">
+          <span class="timer" id="timer" aria-live="polite"></span>
+          <button type="button" class="btn-text" id="btnResetTimer">Reset</button>
+        </div>
+        <div class="time-up hidden" id="pgWrap" aria-live="polite">
+          <img src="pg.jpg" alt="" class="time-up-img" />
+          <p class="time-up-msg">Time's up.</p>
+          <p class="time-up-next">Space to retry · Enter for next</p>
+        </div>
+      </div>
+
+      <div class="actions focus-mode-hide" id="actionButtons">
+        <div class="shortcut-tip hidden" id="shortcutTip">
+          <span>Space = reset · Enter = next</span>
+          <button type="button" class="btn-dismiss" id="shortcutTipDismiss" aria-label="Dismiss">×</button>
+        </div>
+        <div class="tip-line" id="tipBox"><p class="tip-text" id="tipText"></p></div>
+        <div class="action-row">
+          <button type="button" class="btn btn-ghost" id="btnRestartTimer">Reset</button>
+          <button type="button" class="btn btn-primary" id="btnNextQuestion">Next</button>
+        </div>
+      </div>
+
+      <div class="keyhint focus-mode-hide" id="controlsWrap">
+        <span><kbd>Space</kbd> Reset</span>
+        <span><kbd>Enter</kbd> Next</span>
+        <span><kbd>Esc</kbd> Home</span>
+      </div>
+      <div class="meta focus-mode-hide" id="sessionMetaWrap"><span id="questionProgress">0/0</span></div>
+      <button type="button" class="btn-focus-exit focus-mode-only hidden" id="btnFocusExit">Exit focus</button>
+    </section>
+
+    <section class="screen screen-end hidden" id="screenEnd">
+      <div class="card end">
+        <p class="end-icon" aria-hidden="true">✓</p>
+        <h1 class="end-title">Done.</h1>
+        <p class="end-msg">You're ready.</p>
+        <div class="stats" id="sessionStats"></div>
+        <button type="button" class="btn btn-primary btn-block" id="btnAgain">Again</button>
+      </div>
+    </section>
+
+    <dialog class="modal" id="modalSettings" aria-labelledby="modalSettingsTitle">
+      <div class="modal-inner">
+        <h2 id="modalSettingsTitle">Settings</h2>
+        <p>Your choices are saved.</p>
+        <button type="button" class="btn btn-primary" id="btnCloseSettings">Close</button>
+      </div>
+    </dialog>
+  </div>
+
+  <footer class="footer focus-mode-hide">
+    <p><a href="https://github.com/jamescun/iPG" target="_blank" rel="noopener">iPG</a> · YC practice</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
