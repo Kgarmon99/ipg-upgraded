@@ -14,3 +14,9 @@ desktop.ini
 *.log
 .env
 .env.local
+
+# Xcode
+ios/build/
+ios/**/xcuserdata/
+ios/**/*.xcworkspace/xcuserdata/
+*.xcarchive

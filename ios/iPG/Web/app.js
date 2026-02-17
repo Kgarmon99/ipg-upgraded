@@ -243,11 +243,16 @@
     }
 
     if (state.timerDuration > 0) {
+      if (state.timerId) {
+        clearTimeout(state.timerId);
+        state.timerId = null;
+      }
       state.currentTimer = state.timerDuration;
       timerEl.textContent = state.currentTimer + ' s';
       timerEl.classList.remove('warning', 'fail');
       timerWrap.classList.remove('hidden');
       pgWrap.classList.add('hidden');
+      startTimerTick();
     }
   }
 

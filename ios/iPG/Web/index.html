@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>iPG</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -13,39 +15,41 @@
       <nav class="header-actions">
         <button type="button" class="btn-icon hidden" id="btnHome" aria-label="Home">Home</button>
         <button type="button" class="btn-icon focus-mode-hide" id="btnFocus" aria-label="Focus">Focus</button>
-        <button type="button" class="btn-icon" id="btnSettings" aria-label="Settings">Settings</button>
-        <button type="button" class="btn-icon" id="btnTheme" aria-label="Theme">Theme</button>
+        <button type="button" class="btn-icon" id="btnSettings" aria-label="Settings">⚙</button>
+        <button type="button" class="btn-icon" id="btnTheme" aria-label="Theme">◐</button>
       </nav>
     </header>
 
     <section class="screen screen-setup" id="screenSetup">
       <div class="card setup">
         <h1 class="setup-title">Practice</h1>
-        <div class="row">
-          <label for="timerDuration">Time</label>
-          <select id="timerDuration">
-            <option value="10">10 sec</option>
-            <option value="15">15 sec</option>
-            <option value="20">20 sec</option>
-            <option value="30">30 sec</option>
-            <option value="0">No timer</option>
-          </select>
+        <div class="setup-row duo">
+          <div class="field">
+            <label for="timerDuration">Time</label>
+            <select id="timerDuration">
+              <option value="10">10s</option>
+              <option value="15">15s</option>
+              <option value="20">20s</option>
+              <option value="30">30s</option>
+              <option value="0">None</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="questionCount">Questions</label>
+            <select id="questionCount">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="0">All</option>
+            </select>
+          </div>
         </div>
         <div class="row">
           <span class="row-label">Topics</span>
           <div class="category-toggles" id="categoryToggles"></div>
         </div>
         <p class="field-error hidden" id="categoryError">Pick at least one.</p>
-        <div class="row">
-          <label for="questionCount">Questions</label>
-          <select id="questionCount">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="50">50</option>
-            <option value="0">All</option>
-          </select>
-        </div>
         <label class="row row-check">
           <input type="checkbox" id="strictMode" />
           <span>Strict — no reset</span>
@@ -92,13 +96,13 @@
         <div class="time-up hidden" id="pgWrap" aria-live="polite">
           <img src="pg.jpg" alt="" class="time-up-img" />
           <p class="time-up-msg">Time's up.</p>
-          <p class="time-up-next">Space to retry · Enter for next</p>
+          <p class="time-up-next">Tap Next or Reset</p>
         </div>
       </div>
 
       <div class="actions focus-mode-hide" id="actionButtons">
         <div class="shortcut-tip hidden" id="shortcutTip">
-          <span>Space = reset · Enter = next</span>
+          <span>Tap Reset or Next</span>
           <button type="button" class="btn-dismiss" id="shortcutTipDismiss" aria-label="Dismiss">×</button>
         </div>
         <div class="tip-line" id="tipBox"><p class="tip-text" id="tipText"></p></div>
@@ -109,9 +113,9 @@
       </div>
 
       <div class="keyhint focus-mode-hide" id="controlsWrap">
-        <span><kbd>Space</kbd> Reset</span>
-        <span><kbd>Enter</kbd> Next</span>
-        <span><kbd>Esc</kbd> Home</span>
+        <span>Tap Reset</span>
+        <span>Tap Next</span>
+        <span>Tap Home</span>
       </div>
       <div class="meta focus-mode-hide" id="sessionMetaWrap"><span id="questionProgress">0/0</span></div>
       <button type="button" class="btn-focus-exit focus-mode-only hidden" id="btnFocusExit">Exit focus</button>
